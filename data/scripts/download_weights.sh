@@ -18,5 +18,5 @@ models.extend([x + '6' for x in models])  # add P6 models
 for x in models:
     attempt_download(f'yolov5{x}.pt')
     shutil.copy(f'yolov5{x}.pt', 'weights')
-
+    os.remove(f'yolov5{x}.pt')
 EOF
