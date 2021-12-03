@@ -19,9 +19,8 @@
 #			and heavy occlusion = 2 (occlusion ratio 50% ~ 100%)).	
 
 
-
-#Now each text file will contain the center coordinates, height and width of the box, and the class of the object. 
+To convert YOLO
+#Each text file will contain the center coordinates, height and width of the box, and the class of the object. 
 #An image can have more than 1 object, so its text file will have multiple lines, one for each object.
-
 #Each line of the text file will have below format(YOLO):
 #<object-class> <x_center> <y_center> <width> <height>
