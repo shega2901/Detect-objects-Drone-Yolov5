@@ -1,5 +1,5 @@
 #Format of VisDrone text file (folder annotations)(http://aiskyeye.com/evaluate/results-format/): 
-
+#
 #<bbox_left>,<bbox_top>,<bbox_width>,<bbox_height>,<score>,<object_category>,<truncation>,<occlusion>
 #   <bbox_left>	The x coordinate of the top-left corner of the predicted bounding box
 #   <bbox_top>	The y coordinate of the top-left corner of the predicted object bounding box
@@ -17,14 +17,14 @@
 #<occlusion>		The score in the DETECTION result file should be set to the constant -1. The score in the GROUNDTRUTH file indicates 
 #			the fraction of objects being occluded (i.e., no occlusion = 0 (occlusion ratio 0%), partial occlusion = 1(occlusion ratio 1% ∼ 50%), 
 #			and heavy occlusion = 2 (occlusion ratio 50% ~ 100%)).	
-
-
-To convert YOLO
+#
+#
+#To convert YOLO
 #Each text file will contain the center coordinates, height and width of the box, and the class of the object. 
 #An image can have more than 1 object, so its text file will have multiple lines, one for each object.
 #Each line of the text file will have below format(YOLO):
 #<object-class> <x_center> <y_center> <width> <height>
-
+#
 python - <<EOF
  def visdrone2yolo(dir):
       from PIL import Image
