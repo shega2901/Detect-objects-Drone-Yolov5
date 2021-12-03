@@ -26,7 +26,7 @@
 #<object-class> <x_center> <y_center> <width> <height>
 #
 python - <<EOF
- def visdrone2yolo(dir):
+def visdrone2yolo(dir):
       from PIL import Image
       from tqdm import tqdm
       def convert_box(size, box):
@@ -48,7 +48,7 @@ python - <<EOF
                   lines.append(f"{cls} {' '.join(f'{x:.6f}' for x in box)}\n")
                   with open(str(f).replace(os.sep + 'annotations' + os.sep, os.sep + 'labels' + os.sep), 'w') as fl:
                       fl.writelines(lines)  # write label.txt
- dir='VisDrone_datasets'
- for d in 'VisDrone2019-DET-train', 'VisDrone2019-DET-val', 'VisDrone2019-DET-test-dev':
-      visdrone2yolo(dir / d)  # convert VisDrone annotations to YOLO labels
+dir='VisDrone_datasets'
+for d in 'VisDrone2019-DET-train', 'VisDrone2019-DET-val', 'VisDrone2019-DET-test-dev':
+      visdrone2yolo(dir + '/' + d)  # convert VisDrone annotations to YOLO labels
 EOF
