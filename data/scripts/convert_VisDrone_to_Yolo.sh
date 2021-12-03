@@ -33,7 +33,7 @@ from PIL import Image
 from tqdm import tqdm
 def visdrone2yolo(dir):
 
-      def convert_box(size, box):
+     def convert_box(size, box):
           # Convert VisDrone box to YOLO xywh box
           dw = 1. / size[0]
           dh = 1. / size[1]
@@ -41,14 +41,12 @@ def visdrone2yolo(dir):
         
       pathlib.Path(dir + '/labels').mkdir(parents=True, exist_ok=True)  # make labels directory 
       list_of_annotat = os.listdir(dir+'/annotations')
-      print(list_of_annotat)
       #pbar = tqdm(glob.glob(dir+'/annotations/*.txt'), desc=f'Converting {dir}')#(dir+'/annotations').glob('*.txt')
-      #print(pbar)
-      for f in list_of_annotat:#pbar:
+      pbwr = tqdm(list_of_annotat)
+      for f in pbwr:
           img_size = Image.open(dir + '/images'+ '/'+ f[:-3]+'jpg').size
           lines = []
           with open(dir + '/annotations'+ '/'+ f, 'r') as file:  # read annotation.txt  
-                         
               for row in [x.split(',') for x in file.read().strip().splitlines()]:
                   if row[4] == '0':  # VisDrone 'ignored regions' class 0
                       continue
@@ -58,6 +56,7 @@ def visdrone2yolo(dir):
                   #print(lines)
                   with open(dir + '/labels'+ '/'+ f[:-3]+'txt', 'w') as fl: # os.sep = '/' or '\'
                       fl.writelines(lines)  # write label.txt   
+                      
 dir='VisDrone_datasets'
 for d in 'VisDrone2019-DET-train', 'VisDrone2019-DET-val', 'VisDrone2019-DET-test-dev':
       print(dir + '/' + d)
