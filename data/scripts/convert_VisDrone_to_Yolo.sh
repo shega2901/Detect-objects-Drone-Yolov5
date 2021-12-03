@@ -26,20 +26,29 @@
 #<object-class> <x_center> <y_center> <width> <height>
 #
 python - <<EOF
+import pathlib
+import glob
+from PIL import Image
+from tqdm import tqdm
 def visdrone2yolo(dir):
-      from PIL import Image
-      from tqdm import tqdm
+
       def convert_box(size, box):
           # Convert VisDrone box to YOLO xywh box
           dw = 1. / size[0]
           dh = 1. / size[1]
           return (box[0] + box[2] / 2) * dw, (box[1] + box[3] / 2) * dh, box[2] * dw, box[3] * dh
-      (dir / 'labels').mkdir(parents=True, exist_ok=True)  # make labels directory
-      pbar = tqdm((dir / 'annotations').glob('*.txt'), desc=f'Converting {dir}')
-      for f in pbar:
-          img_size = Image.open((dir / 'images' / f.name).with_suffix('.jpg')).size
+        
+      pathlib.Path(dir + '/labels').mkdir(parents=True, exist_ok=True)  # make labels directory 
+      print(glob.glob(dir+'/annotations/*.txt'))
+      #pbar = tqdm(glob.glob(dir+'/annotations/*.txt'), desc=f'Converting {dir}')#(dir+'/annotations').glob('*.txt')
+      #print(pbar)
+      for f in glob.glob(dir+'/annotations/*.txt'):#pbar:
+          print(f)
+          img_size = Image.open((f[:-3]+'.jpg'
+          img_size = Image.open((dir + '/images'+ '/'+ f.name).with_suffix('.jpg')).size
           lines = []
           with open(f, 'r') as file:  # read annotation.txt
+              
               for row in [x.split(',') for x in file.read().strip().splitlines()]:
                   if row[4] == '0':  # VisDrone 'ignored regions' class 0
                       continue
@@ -50,5 +59,6 @@ def visdrone2yolo(dir):
                       fl.writelines(lines)  # write label.txt
 dir='VisDrone_datasets'
 for d in 'VisDrone2019-DET-train', 'VisDrone2019-DET-val', 'VisDrone2019-DET-test-dev':
+      print(dir + '/' + d)
       visdrone2yolo(dir + '/' + d)  # convert VisDrone annotations to YOLO labels
 EOF
