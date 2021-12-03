@@ -33,7 +33,7 @@ from PIL import Image
 from tqdm import tqdm
 def visdrone2yolo(dir):
 
-     def convert_box(size, box):
+      def convert_box(size, box):
           # Convert VisDrone box to YOLO xywh box
           dw = 1. / size[0]
           dh = 1. / size[1]
