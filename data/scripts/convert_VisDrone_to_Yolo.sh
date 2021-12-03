@@ -58,7 +58,7 @@ def visdrone2yolo(dir):
                       fl.writelines(lines)  # write label.txt   
                       
 dir='VisDrone_datasets'
-for d in 'VisDrone2019-DET-train', 'VisDrone2019-DET-val', 'VisDrone2019-DET-test-dev':
+for d in ['VisDrone2019-DET-train', 'VisDrone2019-DET-val', 'VisDrone2019-DET-test-dev']:
       print(dir + '/' + d)
       visdrone2yolo(dir + '/' + d)  # convert VisDrone annotations to YOLO labels
 EOF
