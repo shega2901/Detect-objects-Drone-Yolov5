@@ -24,3 +24,8 @@ To convert YOLO
 #An image can have more than 1 object, so its text file will have multiple lines, one for each object.
 #Each line of the text file will have below format(YOLO):
 #<object-class> <x_center> <y_center> <width> <height>
+
+python - <<EOF
+
+
+EOF
