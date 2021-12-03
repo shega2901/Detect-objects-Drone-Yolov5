@@ -33,7 +33,7 @@ from PIL import Image
 from tqdm import tqdm
 def visdrone2yolo(dir):
 
-      def convert_box(size, box):
+       def convert_box(size, box):
           # Convert VisDrone box to YOLO xywh box
           dw = 1. / size[0]
           dh = 1. / size[1]
@@ -44,20 +44,18 @@ def visdrone2yolo(dir):
       print(list_of_annotat)
       #pbar = tqdm(glob.glob(dir+'/annotations/*.txt'), desc=f'Converting {dir}')#(dir+'/annotations').glob('*.txt')
       #print(pbar)
-      for f in glob.glob(dir+'/annotations/*.txt'):#pbar:
-          print(f)
-          img_size = Image.open((f[:-3]+'.jpg'
-          img_size = Image.open((dir + '/images'+ '/'+ f.name).with_suffix('.jpg')).size
+      for f in list_of_annotat:#pbar:
+          img_size = Image.open(dir + '/images'+ '/'+ f[:-3]+'jpg').size
           lines = []
-          with open(f, 'r') as file:  # read annotation.txt
-              
+          with open(dir + '/annotations'+ '/'+ f, 'r') as file:  # read annotation.txt  
+                         
               for row in [x.split(',') for x in file.read().strip().splitlines()]:
                   if row[4] == '0':  # VisDrone 'ignored regions' class 0
                       continue
                   cls = int(row[5]) - 1
                   box = convert_box(img_size, tuple(map(int, row[:4])))
                   lines.append(f"{cls} {' '.join(f'{x:.6f}' for x in box)}\n")
-                  with open(str(f).replace(os.sep + 'annotations' + os.sep, os.sep + 'labels' + os.sep), 'w') as fl:
+                  with open(dir + '/labels'+ '/'+ f[:-3]+'txt', 'w') as fl: # os.sep = '/' or '\'
                       fl.writelines(lines)  # write label.txt
 dir='VisDrone_datasets'
 for d in 'VisDrone2019-DET-train', 'VisDrone2019-DET-val', 'VisDrone2019-DET-test-dev':
