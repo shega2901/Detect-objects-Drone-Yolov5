@@ -27,6 +27,7 @@
 #
 python - <<EOF
 import pathlib
+import os
 import glob
 from PIL import Image
 from tqdm import tqdm
@@ -39,7 +40,8 @@ def visdrone2yolo(dir):
           return (box[0] + box[2] / 2) * dw, (box[1] + box[3] / 2) * dh, box[2] * dw, box[3] * dh
         
       pathlib.Path(dir + '/labels').mkdir(parents=True, exist_ok=True)  # make labels directory 
-      print(glob.glob(dir+'/annotations/*.txt'))
+      list_of_annotat = os.listdir(dir+'/annotations')
+      print(list_of_annotat)
       #pbar = tqdm(glob.glob(dir+'/annotations/*.txt'), desc=f'Converting {dir}')#(dir+'/annotations').glob('*.txt')
       #print(pbar)
       for f in glob.glob(dir+'/annotations/*.txt'):#pbar:
