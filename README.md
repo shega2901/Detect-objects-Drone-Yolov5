@@ -13,9 +13,7 @@ To begin, upload Project_YOLO5.ipynb to the Collaboratory:
 5. From the menu "File" save a copy in Drive
 ## <div align="center">An explanation of the Project_YOLOv5.ipynb algorithm</div>
 
-
-<details open>
-<summary>Clone&Install</summary>
+<details open><summary>Clone&Install</summary>
 Cloning repositary to colab disk. Rename folder "Detect-objects-Drone-Yolov5" to "yolov5". Install required libraries for traning the model<br>
  
 ```bash
@@ -26,8 +24,7 @@ $ pip install -qr requirements.txt
 ```
 </details>
 <br>
-<details open>
-<summary>Preparing to train the model YOLO</summary>
+<details open><summary>Preparing to train the model YOLO</summary>
  <b>1. Pre-weights for model YOLO</b><br>
  Pre-weights downloading from https://github.com/ultralytics/yolov5/releases/download<br>
  Downloading pre-weights to folder <b>yolov5/weights</b> for training model yolov5.<br>
@@ -98,9 +95,8 @@ VisDrone_datasets/VisDrone2019-DET-test-dev
 100% 1610/1610 [00:13<00:00, 119.04it/s]
 </code></pre><br>
  As a result of executing the script, a labels folder is created in each folder from the VisDrone2019 dataset<br>
-
-<details>
-<summary>Train model YOLO on VisDrone2019 dataset</summary>
+</details>
+<details open><summary>Train model YOLO on VisDrone2019 dataset</summary>
 <pre><code> python train.py --img 640 --batch 12 --epochs 10 --data ./data/VisDrone.yaml --weights ./weights/yolov5s.pt</code></pre><br>
 <b>Command explanation:</b><br>
 <b>train.py:</b> python file containing the training code.<br>
@@ -247,12 +243,24 @@ Model Summary: 213 layers, 7037095 parameters, 0 gradients, 15.9 GFLOPs
      awning-tricycle        548        532      0.228      0.015     0.0354     0.0202
                  bus        548        251      0.406      0.332      0.247      0.142
                motor        548       4886      0.368      0.423      0.326      0.107
+<br>
 <b>Results saved to runs/train/exp</b>
 </code></pre><br>
+    <b>Results Graphs of traning model YOLOv5</b><br>
+    Graph of epochs=10<br>
+    ![epochs](/runs/train/exp/results.png)<br>
+    Graph F1<br>
+    ![epochs](/runs/train/exp/F1_curve.png)<br>
+    Graph P_curve<br>
+    ![epochs](/runs/train/exp/P_curve.png)<br>
+    Graph R_curve<br>
+    ![epochs](/runs/train/exp/R_curve.png)<br>
+    Graph PR_curve<br>
+    ![epochs](/runs/train/exp/PR_curve.png)<br>
 </details>
-
-<details>
-<summary>Validate model YOLO on VisDrone2019-val dataset</summary>
+    
+    
+<details open><summary><b>Validate model YOLO on VisDrone2019-val dataset</b></summary>
 Checking model accuracy on VisDrone2019 val datasets. Using the weights file - best.pt
 <pre><code> python val.py --weights runs/train/exp/weights/best.pt --data data/VisDrone.yaml --img 640 --iou 0.65 --half</code></pre><br>
 <b>Command explanation:</b><br>
@@ -285,10 +293,17 @@ val: Scanning '../yolov5/VisDrone_datasets/VisDrone2019-DET-val/labels.cache' im
 Speed: 0.2ms pre-process, 12.3ms inference, 20.2ms NMS per image at shape (32, 3, 640, 640)
 <b>Results saved to runs/val/exp</b>
 </code></pre><br>
+<b>Results Graphs of validate model YOLOv5</b><br>
+    Graph F1<br>
+    ![epochs](/runs/val/exp/F1_curve.png)<br>
+    Graph P_curve<br>
+    ![epochs](/runs/val/exp/P_curve.png)<br>
+    Graph R_curve<br>
+    ![epochs](/runs/val/exp/R_curve.png)<br>
+    Graph PR_curve<br>
+    ![epochs](/runs/val/exp/PR_curve.png)<br>
 </details>
-
-<details>
-<summary>Validate model YOLO on VisDrone2019-test-dev dataset</summary>
+<details open><summary>Validate-testing model YOLO on VisDrone2019-test-dev dataset</summary>
 Checking model accuracy on VisDrone2019 test dev datasets. Using the weights file - best.pt
 <pre><code> python val.py --weights runs/train/exp/weights/best.pt --task test --data data/VisDrone.yaml --img 640 --iou 0.65 --half</code></pre><br>
 <b>Command explanation:</b><br>
@@ -319,6 +334,45 @@ test: New cache created: ../yolov5/VisDrone_datasets/VisDrone2019-DET-test-dev/l
                  bus       1610       2940       0.51      0.477      0.464      0.278
                motor       1610       5845      0.341      0.237      0.182     0.0592
 Speed: 0.2ms pre-process, 12.9ms inference, 15.5ms NMS per image at shape (32, 3, 640, 640)
-<b>Results saved to runs/val/exp2</b>
+<b>Results saved to runs/test/exp</b>
 </code></pre><br>
+<b>Results Graphs of Validate-testing model YOLOv5</b><br>
+    Graph F1<br>
+    ![epochs](/runs/test/exp/F1_curve.png)<br>
+    Graph P_curve<br>
+    ![epochs](/runs/test/exp/P_curve.png)<br>
+    Graph R_curve<br>
+    ![epochs](/runs/test/exp/R_curve.png)<br>
+    Graph PR_curve<br>
+    ![epochs](/runs/test/exp/PR_curve.png)<br>
 </details>
+
+
+<details>
+<summary>Inference with detect.py</summary>
+
+`detect.py` runs inference on a variety of sources, downloading models automatically from
+the latest YOLOv5 release and saving results to `runs/detect`.
+
+```bash
+$ python detect.py --source 0  # webcam
+                            img.jpg  # image
+                            vid.mp4  # video
+                            path/  # directory
+                            path/*.jpg  # glob
+                            'https://youtu.be/Zgi9g1ksQHc'  # YouTube
+                            'rtsp://example.com/media.mp4'  # RTSP, RTMP, HTTP stream
+```
+
+Checking model accuracy on video. Using the weights file - best.pt
+<pre><code> python detect.py --weights runs/train/exp/weights/best.pt --img 640 --conf 0.25 --source data/video</code></pre><br>
+<b>Command explanation:</b><br>
+<b>detect.py:</b> python file containing the detect code.<br>
+<b>img:</b> image size defaulted to 640<br>
+<b>source:</b> type of source.<br>
+<b>task:</b> = test<br>
+<b>weights:</b> The path to the weights file created during training.<br>
+<pre><code>  
+</details>
+
+
