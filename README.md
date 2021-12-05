@@ -1,6 +1,6 @@
 ## <div align="center">Detect-objects-Drone-Yolov5</div>
 
-See the [YOLOv5 Docs](https://docs.ultralytics.com) for full documentation on training, testing and deployment.
+The model used was YOLOv5. Collaboration was used. The VisDrone 2019 dataset was used.
 
 ## <div align="center">Quick Start Examples</div>
 
