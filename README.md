@@ -110,6 +110,145 @@ VisDrone_datasets/VisDrone2019-DET-test-dev
 <b>weights:</b> the path of pre-weights file that has downloaded.<br>
 <b>epochs:</b> number of passes of the entire training the neural network with all the training data<br>
 Once training is completed in the "YoloV5/runs/train" folder are two weights files, <b>"best.pt"</b> and <b>"last.pt"</b> which are the trained weights.<br>
+<pre><code>
+<b>train:</b> weights=./weights/yolov5s.pt, cfg=, data=./data/VisDrone.yaml, hyp=data/hyps/hyp.scratch.yaml, epochs=10, batch_size=12, imgsz=640,
+rect=False, resume=False, nosave=False, noval=False, noautoanchor=False, evolve=None,
+bucket=, cache=None, image_weights=False, device=, multi_scale=False, single_cls=False, adam=False,
+sync_bn=False, workers=8, project=runs/train, name=exp, exist_ok=False, quad=False,
+linear_lr=False, label_smoothing=0.0, patience=100, freeze=0, save_period=-1, local_rank=-1,
+entity=None, upload_dataset=False, bbox_interval=-1, artifact_alias=latest
+
+<b>hyperparameters:</b> lr0=0.01, lrf=0.1, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, 
+warmup_bias_lr=0.1, box=0.05, cls=0.5, cls_pw=1.0, obj=1.0, obj_pw=1.0, iou_t=0.2, anchor_t=4.0, fl_gamma=0.0, hsv_h=0.015, 
+hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, mosaic=1.0,
+mixup=0.0, copy_paste=0.0
+Overriding model.yaml nc=10
+
+                 from  n    params  module                                  arguments                     
+  0                -1  1      3520  models.common.Conv                      [3, 32, 6, 2, 2]              
+  1                -1  1     18560  models.common.Conv                      [32, 64, 3, 2]                
+  2                -1  1     18816  models.common.C3                        [64, 64, 1]                   
+  3                -1  1     73984  models.common.Conv                      [64, 128, 3, 2]               
+  4                -1  2    115712  models.common.C3                        [128, 128, 2]                 
+  5                -1  1    295424  models.common.Conv                      [128, 256, 3, 2]              
+  6                -1  3    625152  models.common.C3                        [256, 256, 3]                 
+  7                -1  1   1180672  models.common.Conv                      [256, 512, 3, 2]              
+  8                -1  1   1182720  models.common.C3                        [512, 512, 1]                 
+  9                -1  1    656896  models.common.SPPF                      [512, 512, 5]                 
+ 10                -1  1    131584  models.common.Conv                      [512, 256, 1, 1]              
+ 11                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 12           [-1, 6]  1         0  models.common.Concat                    [1]                           
+ 13                -1  1    361984  models.common.C3                        [512, 256, 1, False]          
+ 14                -1  1     33024  models.common.Conv                      [256, 128, 1, 1]              
+ 15                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 16           [-1, 4]  1         0  models.common.Concat                    [1]                           
+ 17                -1  1     90880  models.common.C3                        [256, 128, 1, False]          
+ 18                -1  1    147712  models.common.Conv                      [128, 128, 3, 2]              
+ 19          [-1, 14]  1         0  models.common.Concat                    [1]                           
+ 20                -1  1    296448  models.common.C3                        [256, 256, 1, False]          
+ 21                -1  1    590336  models.common.Conv                      [256, 256, 3, 2]              
+ 22          [-1, 10]  1         0  models.common.Concat                    [1]                           
+ 23                -1  1   1182720  models.common.C3                        [512, 512, 1, False]          
+ 24      [17, 20, 23]  1     40455  models.yolo.Detect                      [10, [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]], [128, 256, 512]]
+Model Summary: 270 layers, 7046599 parameters, 7046599 gradients, 15.9 GFLOPs
+
+Transferred 343/349 items from weights/yolov5s.pt
+Scaled weight_decay = 0.00046875
+optimizer: SGD with parameter groups 57 weight, 60 weight (no decay), 60 bias
+albumentations: version 1.0.3 required by YOLOv5, but version 0.1.12 is currently installed
+train: Scanning '../yolov5/VisDrone_datasets/VisDrone2019-DET-train/labels' images and labels...6471 found, 0 missing, 0 empty, 0 corrupted: 100% 6471/6471 [00:08<00:00, 777.23it/s] 
+train: WARNING: ../yolov5/VisDrone_datasets/VisDrone2019-DET-train/images/0000137_02220_d_0000163.jpg: 1 duplicate labels removed
+train: WARNING: ../yolov5/VisDrone_datasets/VisDrone2019-DET-train/images/0000140_00118_d_0000002.jpg: 1 duplicate labels removed
+train: WARNING: ../yolov5/VisDrone_datasets/VisDrone2019-DET-train/images/9999945_00000_d_0000114.jpg: 1 duplicate labels removed
+train: WARNING: ../yolov5/VisDrone_datasets/VisDrone2019-DET-train/images/9999987_00000_d_0000049.jpg: 1 duplicate labels removed
+train: New cache created: ../yolov5/VisDrone_datasets/VisDrone2019-DET-train/labels.cache
+val: Scanning '../yolov5/VisDrone_datasets/VisDrone2019-DET-val/labels' images and labels...548 found, 0 missing, 0 empty, 0 corrupted: 100% 548/548 [00:00<00:00, 561.50it/s]
+val: New cache created: ../yolov5/VisDrone_datasets/VisDrone2019-DET-val/labels.cache
+Plotting labels to runs/train/exp/labels.jpg... 
+
+AutoAnchor: 2.95 anchors/target, 0.933 Best Possible Recall (BPR). Anchors are a poor fit to dataset ⚠️, attempting to improve...
+AutoAnchor: WARNING: Extremely small objects found. 29644 of 343201 labels are < 3 pixels in size.
+AutoAnchor: Running kmeans for 9 anchors on 342304 points...
+AutoAnchor: Evolving anchors with Genetic Algorithm: fitness = 0.7525: 100% 1000/1000 [02:08<00:00,  7.78it/s]
+AutoAnchor: thr=0.25: 0.9994 best possible recall, 5.81 anchors past thr
+AutoAnchor: n=9, img_size=640, metric_all=0.367/0.752-mean/best, past_thr=0.485-mean: 3,4, 4,9, 8,6, 7,14, 15,9, 15,19, 31,17, 25,37, 55,42
+AutoAnchor: New anchors saved to model. Update model *.yaml to use these anchors in the future.
+Image sizes 640 train, 640 val
+Using 2 dataloader workers
+Logging results to runs/train/exp
+Starting training for 10 epochs...
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+       0/9     2.55G    0.1266    0.1409   0.04928       245       640: 100% 540/540 [13:13<00:00,  1.47s/it]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 23/23 [00:28<00:00,  1.24s/it]
+                 all        548      38759      0.379       0.15     0.0911     0.0362
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+       1/9     2.86G    0.1099    0.1725   0.03813       117       640: 100% 540/540 [13:20<00:00,  1.48s/it]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 23/23 [00:24<00:00,  1.07s/it]
+                 all        548      38759       0.35      0.187      0.123     0.0501
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+       2/9     2.86G    0.1078    0.1732   0.03549       111       640: 100% 540/540 [13:20<00:00,  1.48s/it]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 23/23 [00:23<00:00,  1.01s/it]
+                 all        548      38759      0.369      0.201      0.147     0.0632
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+       3/9     2.86G    0.1047    0.1728   0.03343       178       640: 100% 540/540 [13:16<00:00,  1.48s/it]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 23/23 [00:24<00:00,  1.05s/it]
+                 all        548      38759       0.43      0.192      0.176       0.08
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+       4/9     2.86G    0.1033    0.1749   0.03211       247       640: 100% 540/540 [13:30<00:00,  1.50s/it]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 23/23 [00:24<00:00,  1.06s/it]
+                 all        548      38759      0.439      0.202      0.189     0.0882
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+       5/9     2.86G    0.1017    0.1736    0.0313       267       640: 100% 540/540 [13:25<00:00,  1.49s/it]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 23/23 [00:23<00:00,  1.00s/it]
+                 all        548      38759      0.413      0.231      0.211      0.102
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+       6/9     2.86G    0.1005    0.1716   0.03046       264       640: 100% 540/540 [13:26<00:00,  1.49s/it]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 23/23 [00:21<00:00,  1.09it/s]
+                 all        548      38759      0.422       0.23      0.215      0.103
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+       7/9     2.86G   0.09936    0.1701   0.02983       517       640: 100% 540/540 [13:21<00:00,  1.48s/it]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 23/23 [00:21<00:00,  1.06it/s]
+                 all        548      38759      0.301      0.255      0.227      0.112
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+       8/9     2.86G    0.0991    0.1684   0.02934       176       640: 100% 540/540 [13:19<00:00,  1.48s/it]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 23/23 [00:21<00:00,  1.07it/s]
+                 all        548      38759      0.335      0.275      0.239       0.12
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+       9/9     2.86G    0.0982    0.1654   0.02902       345       640: 100% 540/540 [13:23<00:00,  1.49s/it]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 23/23 [00:20<00:00,  1.12it/s]
+                 all        548      38759      0.327      0.278      0.244      0.123
+
+<b>10 epochs completed in 2.295 hours.</b>
+Optimizer stripped from <b>runs/train/exp/weights/last.pt</b>, 14.4MB
+Optimizer stripped from <b>runs/train/exp/weights/best.pt</b>, 14.4MB
+
+Validating runs/train/exp/weights/best.pt...
+Fusing layers... 
+Model Summary: 213 layers, 7037095 parameters, 0 gradients, 15.9 GFLOPs
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 23/23 [00:44<00:00,  1.94s/it]
+                 all        548      38759      0.318      0.283      0.244      0.123
+          pedestrian        548       8844       0.33      0.404      0.345      0.134
+              people        548       5125      0.345      0.326      0.262     0.0804
+             bicycle        548       1287      0.135     0.0437     0.0403     0.0129
+                 car        548      14064      0.445      0.734      0.686      0.434
+                 van        548       1975      0.303      0.253       0.21      0.138
+               truck        548        750       0.29      0.252      0.196      0.113
+            tricycle        548       1045      0.328      0.044     0.0876     0.0465
+     awning-tricycle        548        532      0.228      0.015     0.0354     0.0202
+                 bus        548        251      0.406      0.332      0.247      0.142
+               motor        548       4886      0.368      0.423      0.326      0.107
+<b>Results saved to runs/train/exp<b>
+</code></pre><br>
 </details>
 
 
