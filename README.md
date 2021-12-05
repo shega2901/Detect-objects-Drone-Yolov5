@@ -20,15 +20,47 @@ Cloning repositary to colab disk. Rename folder "Detect-objects-Drone-Yolov5" to
 $ git clone https://github.com/shega2901/Detect-objects-Drone-Yolov5
 $ %mv Detect-objects-Drone-Yolov5 yolov5  
 $ cd yolov5
-$ pip install -r requirements.txt
+$ pip install -qr requirements.txt
 ```
 </details>
 
 <details open>
 <summary>Train model YOLO on VisDrone 2019 dataset</summary>
 
-Inference with YOLOv5 and [PyTorch Hub](https://github.com/ultralytics/yolov5/issues/36). Models automatically download
-from the [latest YOLOv5 release](https://github.com/ultralytics/yolov5/releases).
+Download pre-weight for training model yolov5 - using script [download_weights.sh](/data/scripts/download_weights.sh) <br>
+  `!bash data/scripts/download_weights.sh`<br>
+  Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5n.pt to yolov5n.pt...
+100% 3.77M/3.77M [00:01<00:00, 2.20MB/s]
+
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5s.pt to yolov5s.pt...
+100% 14.0M/14.0M [00:02<00:00, 6.59MB/s]
+
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5m.pt to yolov5m.pt...
+100% 40.7M/40.7M [00:03<00:00, 11.0MB/s]
+
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5l.pt to yolov5l.pt...
+100% 89.2M/89.2M [00:04<00:00, 20.0MB/s]
+
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5x.pt to yolov5x.pt...
+100% 166M/166M [00:10<00:00, 16.9MB/s]
+
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5n6.pt to yolov5n6.pt...
+100% 6.56M/6.56M [00:01<00:00, 3.77MB/s]
+
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5s6.pt to yolov5s6.pt...
+100% 24.5M/24.5M [00:02<00:00, 8.67MB/s]
+
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5m6.pt to yolov5m6.pt...
+100% 68.7M/68.7M [00:05<00:00, 13.2MB/s]
+
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5l6.pt to yolov5l6.pt...
+100% 147M/147M [00:07<00:00, 19.5MB/s]
+
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5x6.pt to yolov5x6.pt...
+100% 269M/269M [00:16<00:00, 17.6MB/s]
+Pre-weight downloading from https://github.com/ultralytics/yolov5/releases <br><br>
+Download dataset VISDrone2019 for train,val,test from https://github.com/ultralytics/yolov5/releases/download to folder <b>VisDrone_dataset<b>
+  
 
 ```python
 import torch
