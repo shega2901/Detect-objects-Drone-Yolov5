@@ -822,7 +822,7 @@ Results saved to runs/detect/exp
 Input video<br>
     ![videoI](/data/video/181015-01-011_640.gif)<br>
 Output video<br>
-    ![videoO](/runs/detect/181015-01-011_640 (1).gif)
+    ![videoO](/runs/detect/exp/181015-01-011_640.gif)
 </details>
 
 
