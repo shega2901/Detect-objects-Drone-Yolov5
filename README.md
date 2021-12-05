@@ -24,11 +24,12 @@ $ pip install -qr requirements.txt
 </details>
 
 <details open>
-<summary>Train model YOLO on VisDrone 2019 dataset</summary>
-
-Download pre-weight to folder `yolov5/weights` for training model yolov5. Pre-weights downloading from https://github.com/ultralytics/yolov5/releases/download <br>
+<summary>Preparing to train the model YOLO</summary>
+Downloading pre-weight to folder <b>yolov5/weights</b> for training model yolov5.<br>
+Pre-weights downloading from [github.com/ultralytics/yolov5/releases/download](https://github.com/ultralytics/yolov5/releases/download) .<br>
 Using script [download_weights.sh](/data/scripts/download_weights.sh) <br>
-  `!bash data/scripts/download_weights.sh`
+Using script [download_weights.sh](/data/scripts/get_visdrone.sh)
+`bash data/scripts/download_weights.sh`
 <pre><code>
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5n.pt to yolov5n.pt...
 100% 3.77M/3.77M [00:01<00:00, 2.20MB/s]
@@ -54,7 +55,7 @@ Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5x
 
 Download dataset VISDrone2019 for train,val,test from https://github.com/ultralytics/yolov5/releases/download to folder <b>VisDrone_datasets</b><br>
 Using script [download_weights.sh](/data/scripts/get_visdrone.sh) <br>
-  `!bash data/scripts/get_visdrone.sh`
+`!bash data/scripts/get_visdrone.sh`<br>
 <pre><code>  
 Downloading https://github.com/ultralytics/yolov5/releases/download/v1.0/VisDrone2019-DET-train.zip to VisDrone_datasets/VisDrone2019-DET-train.zip...
 100% 1.44G/1.44G [02:00<00:00, 12.9MB/s]
@@ -74,20 +75,26 @@ For each picture in the "images" folder, there is an "annotations" folder contai
 These text files need to generate labels for each image in YOLO format:
 `<class> <x_center> <y_center> <width> <height>`<br>
 where:<br>
-` <class> = <object_category> if <score> = 1`<br>
+`<class> = <object_category> if <score> = 1`<br>
 `<x_center> = (<bbox_left>+<bbox_width>)/2`<br>
 `<y_center> = (<bbox_top>+<bbox_height>)/2`<br>
 `<width> = <bbox_width>`<br>
 `<height> = <bbox_height>`<br>
  Using script [convert_VisDrone_to_Yolo.sh](/data/scripts/convert_VisDrone_to_Yolo.sh) <br>
-  `!bash data/scripts/convert_VisDrone_to_Yolo.sh`<br>
+`!bash data/scripts/convert_VisDrone_to_Yolo.sh`<br>
 <pre><code>VisDrone_datasets/VisDrone2019-DET-train
 100% 6471/6471 [01:00<00:00, 107.22it/s]
 VisDrone_datasets/VisDrone2019-DET-val
 100% 548/548 [00:06<00:00, 79.72it/s]
 VisDrone_datasets/VisDrone2019-DET-test-dev
-100% 1610/1610 [00:13<00:00, 119.04it/s]</code></pre>
- As a result of executing the script, a labels folder is created in each folder from the VisDrone2019 dataset
+100% 1610/1610 [00:13<00:00, 119.04it/s]
+</code></pre><br>
+ As a result of executing the script, a labels folder is created in each folder from the VisDrone2019 dataset<br>
+</details>
+<details open>
+<summary>Train model YOLO on VisDrone 2019 dataset</summary><br>
+`python train.py --img 640 --batch 12 --epochs 10 --data ./data/VisDrone.yaml --weights ./weights/yolov5s.pt`
+</details>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
    
   
