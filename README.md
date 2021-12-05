@@ -247,11 +247,78 @@ Model Summary: 213 layers, 7037095 parameters, 0 gradients, 15.9 GFLOPs
      awning-tricycle        548        532      0.228      0.015     0.0354     0.0202
                  bus        548        251      0.406      0.332      0.247      0.142
                motor        548       4886      0.368      0.423      0.326      0.107
-<b>Results saved to runs/train/exp<b>
+<b>Results saved to runs/train/exp</b>
 </code></pre><br>
 </details>
 
+<details>
+<summary>Validate model YOLO on VisDrone2019-val dataset</summary>
+Checking model accuracy on VisDrone2019 val datasets. Using the weights file - best.pt
+<pre><code> python val.py --weights runs/train/exp/weights/best.pt --data data/VisDrone.yaml --img 640 --iou 0.65 --half</code></pre><br>
+<b>Command explanation:</b><br>
+<b>val.py:</b> python file containing the training code.<br>
+<b>img:</b> image size defaulted to 640<br>
+<b>data:</b> the path of your YAML file.<br>
+ <b>task:</b> = val, default = val<br>
+<b>weights:</b> The path to the weights file created during training.<br>
+<pre><code>  
+val: data=data/VisDrone.yaml, weights=['runs/train/exp/weights/best.pt'], batch_size=32, imgsz=640, conf_thres=0.001, iou_thres=0.65, task=val, 
+device=, single_cls=False, augment=False, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, 
+save_json=False, project=runs/val, name=exp, exist_ok=False, half=True, dnn=False
 
+Fusing layers... 
+Model Summary: 213 layers, 7037095 parameters, 0 gradients, 15.9 GFLOPs
+val: Scanning '../yolov5/VisDrone_datasets/VisDrone2019-DET-val/labels.cache' images and labels... 548 found, 
+0 missing, 0 empty, 0 corrupted: 100% 548/548 [00:00<?, ?it/s]
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 18/18 [00:44<00:00,  2.45s/it]
+                 all        548      38759       0.31       0.28      0.239      0.121
+          pedestrian        548       8844      0.307      0.404      0.336      0.132
+              people        548       5125      0.321      0.328      0.251     0.0772
+             bicycle        548       1287      0.148     0.0396     0.0388     0.0127
+                 car        548      14064      0.413      0.737       0.68       0.43
+                 van        548       1975      0.312      0.244      0.209      0.137
+               truck        548        750      0.286      0.247      0.194      0.112
+            tricycle        548       1045      0.347     0.0421     0.0855     0.0463
+     awning-tricycle        548        532      0.216     0.0132     0.0342     0.0198
+                 bus        548        251      0.404      0.331       0.25      0.144
+               motor        548       4886      0.345       0.42      0.315      0.104
+Speed: 0.2ms pre-process, 12.3ms inference, 20.2ms NMS per image at shape (32, 3, 640, 640)
+<b>Results saved to runs/val/exp</b>
+</code></pre><br>
+</details>
 
+<details>
+<summary>Validate model YOLO on VisDrone2019-test-dev dataset</summary>
+Checking model accuracy on VisDrone2019 test dev datasets. Using the weights file - best.pt
+<pre><code> python val.py --weights runs/train/exp/weights/best.pt --task test --data data/VisDrone.yaml --img 640 --iou 0.65 --half</code></pre><br>
+<b>Command explanation:</b><br>
+<b>val.py:</b> python file containing the training code.<br>
+<b>img:</b> image size defaulted to 640<br>
+<b>data:</b> the path of your YAML file.<br>
+<b>task:</b> = test<br>
+<b>weights:</b> The path to the weights file created during training.<br>
+<pre><code>  
+val: data=data/VisDrone.yaml, weights=['runs/train/exp/weights/best.pt'], batch_size=32, imgsz=640, conf_thres=0.001, iou_thres=0.65,
+task=test, device=, single_cls=False, augment=False, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, 
+save_json=False, project=runs/val, name=exp, exist_ok=False, half=True, dnn=False
 
-
+Fusing layers... 
+Model Summary: 213 layers, 7037095 parameters, 0 gradients, 15.9 GFLOPs
+test: Scanning '../yolov5/VisDrone_datasets/VisDrone2019-DET-test-dev/labels' images and labels...1610 found, 0 missing, 0 empty, 0 corrupted: 100% 1610/1610 [00:03<00:00, 499.95it/s]
+test: New cache created: ../yolov5/VisDrone_datasets/VisDrone2019-DET-test-dev/labels.cache
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100% 51/51 [01:24<00:00,  1.65s/it]
+                 all       1610      75102      0.323      0.249      0.214      0.108
+          pedestrian       1610      21006       0.33      0.243      0.214     0.0762
+              people       1610       6376      0.334      0.144      0.126     0.0348
+             bicycle       1610       1302      0.315       0.02     0.0592     0.0202
+                 car       1610      28074      0.425      0.722      0.649      0.373
+                 van       1610       5771      0.248      0.283      0.192      0.114
+               truck       1610       2659      0.218      0.334      0.182     0.0947
+            tricycle       1610        530       0.22     0.0264     0.0383     0.0202
+     awning-tricycle       1610        599      0.291    0.00755     0.0307     0.0137
+                 bus       1610       2940       0.51      0.477      0.464      0.278
+               motor       1610       5845      0.341      0.237      0.182     0.0592
+Speed: 0.2ms pre-process, 12.9ms inference, 15.5ms NMS per image at shape (32, 3, 640, 640)
+<b>Results saved to runs/val/exp2</b>
+</code></pre><br>
+</details>
