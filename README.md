@@ -4,7 +4,10 @@ The model used was YOLO. Collaboration was used. The VisDrone 2019 dataset was u
 
 ## <div align="center">Start</div>
 To begin, upload Project_YOLO5.ipynb to the Collaboratory:
-1. Visit [the Colaboratory page](https://colab.research.google.com/)
+1. Visit [the Colaboratory page](https://colab.research.google.com/) in a new tab
+2. From the menu "File," open the notebook
+3. Then select GitHub. Enter a GitHub URL: shega2901. Reposytory: shega2901/Detect-objects-Drone-Yolov5. Branch: master.   Then upload Project_YOLO5.ipynb from Path: ![Open Project](/PictureReadme/Colab1.jpg)
+
 <details open>
 <summary>Install</summary>
 
