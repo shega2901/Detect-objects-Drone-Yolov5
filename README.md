@@ -9,7 +9,6 @@ To begin, upload Project_YOLO5.ipynb to the Collaboratory:
 3. Then select GitHub. Enter a GitHub URL: shega2901. Reposytory: shega2901/Detect-objects-Drone-Yolov5. Branch: master.   Then upload Project_YOLO5.ipynb from Path: ![Open Project](/PictureReadme/Colab1.jpg)
 4. Mount Google Drive
 5. From the menu "File," save a copy in Drive
-6. 
 ## <div align="center">An explanation of the Project_YOLOv5.ipynb algorithm</div>
 
 <details open>
@@ -27,41 +26,76 @@ $ pip install -qr requirements.txt
 <details open>
 <summary>Train model YOLO on VisDrone 2019 dataset</summary>
 
-Download pre-weight for training model yolov5 - using script [download_weights.sh](/data/scripts/download_weights.sh) <br>
-  `!bash data/scripts/download_weights.sh`<br>
-  Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5n.pt to yolov5n.pt...
+Download pre-weight to folder `yolov5/weights` for training model yolov5. Pre-weights downloading from https://github.com/ultralytics/yolov5/releases/download <br>
+Using script [download_weights.sh](/data/scripts/download_weights.sh) <br>
+  `!bash data/scripts/download_weights.sh`
+<pre><code>
+Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5n.pt to yolov5n.pt...
 100% 3.77M/3.77M [00:01<00:00, 2.20MB/s]
-
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5s.pt to yolov5s.pt...
 100% 14.0M/14.0M [00:02<00:00, 6.59MB/s]
-
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5m.pt to yolov5m.pt...
 100% 40.7M/40.7M [00:03<00:00, 11.0MB/s]
-
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5l.pt to yolov5l.pt...
 100% 89.2M/89.2M [00:04<00:00, 20.0MB/s]
-
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5x.pt to yolov5x.pt...
 100% 166M/166M [00:10<00:00, 16.9MB/s]
-
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5n6.pt to yolov5n6.pt...
 100% 6.56M/6.56M [00:01<00:00, 3.77MB/s]
-
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5s6.pt to yolov5s6.pt...
 100% 24.5M/24.5M [00:02<00:00, 8.67MB/s]
-
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5m6.pt to yolov5m6.pt...
 100% 68.7M/68.7M [00:05<00:00, 13.2MB/s]
-
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5l6.pt to yolov5l6.pt...
 100% 147M/147M [00:07<00:00, 19.5MB/s]
-
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5x6.pt to yolov5x6.pt...
 100% 269M/269M [00:16<00:00, 17.6MB/s]
-Pre-weight downloading from https://github.com/ultralytics/yolov5/releases <br><br>
-Download dataset VISDrone2019 for train,val,test from https://github.com/ultralytics/yolov5/releases/download to folder <b>VisDrone_dataset<b>
-  
+</code></pre><br><br>
 
+Download dataset VISDrone2019 for train,val,test from https://github.com/ultralytics/yolov5/releases/download to folder <b>VisDrone_datasets</b><br>
+Using script [download_weights.sh](/data/scripts/get_visdrone.sh) <br>
+  `!bash data/scripts/get_visdrone.sh`
+<pre><code>  
+Downloading https://github.com/ultralytics/yolov5/releases/download/v1.0/VisDrone2019-DET-train.zip to VisDrone_datasets/VisDrone2019-DET-train.zip...
+100% 1.44G/1.44G [02:00<00:00, 12.9MB/s]
+Unzipping VisDrone_datasets/VisDrone2019-DET-train.zip...
+Downloading https://github.com/ultralytics/yolov5/releases/download/v1.0/VisDrone2019-DET-val.zip to VisDrone_datasets/VisDrone2019-DET-val.zip...
+100% 77.9M/77.9M [00:04<00:00, 20.0MB/s]
+Unzipping VisDrone_datasets/VisDrone2019-DET-val.zip...
+Downloading https://github.com/ultralytics/yolov5/releases/download/v1.0/VisDrone2019-DET-test-dev.zip to VisDrone_datasets/VisDrone2019-DET-test-dev.zip...
+100% 297M/297M [01:13<00:00, 4.23MB/s]
+Unzipping VisDrone_datasets/VisDrone2019-DET-test-dev.zip...
+Downloading https://github.com/ultralytics/yolov5/releases/download/v1.0/VisDrone2019-DET-test-challenge.zip to VisDrone_datasets/VisDrone2019-DET-test-challenge.zip...
+100% 292M/292M [01:04<00:00, 4.77MB/s]
+Unzipping VisDrone_datasets/VisDrone2019-DET-test-challenge.zip... 
+</code></pre><br><br>
+For each picture in the "images" folder, there is an "annotations" folder containing a text file. Each file from the Annotation package stores the detection results for the corresponding image, with each line containing an instance of an object in the image. The format of each line is as follows:  
+`<bbox_left>,<bbox_top>,<bbox_width>,<bbox_height>,<score>,<object_category>,<truncation>,<occlusion>`  
+These text files need to generate labels for each image in YOLO format:
+`<class> <x_center> <y_center> <width> <height>`<br>
+where:<br>
+` <class> = <object_category> if <score> = 1`<br>
+`<x_center> = (<bbox_left>+<bbox_width>)/2`<br>
+`<y_center> = (<bbox_top>+<bbox_height>)/2`<br>
+`<width> = <bbox_width>`<br>
+`<height> = <bbox_height>`<br>
+ Using script [convert_VisDrone_to_Yolo.sh](/data/scripts/convert_VisDrone_to_Yolo.sh) <br>
+  `!bash data/scripts/convert_VisDrone_to_Yolo.sh`<br>
+<pre><code>VisDrone_datasets/VisDrone2019-DET-train
+100% 6471/6471 [01:00<00:00, 107.22it/s]
+VisDrone_datasets/VisDrone2019-DET-val
+100% 548/548 [00:06<00:00, 79.72it/s]
+VisDrone_datasets/VisDrone2019-DET-test-dev
+100% 1610/1610 [00:13<00:00, 119.04it/s]</code></pre>
+ As a result of executing the script, a labels folder is created in each folder from the VisDrone2019 dataset
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+   
+  
+  
+  
+  
+  
+  
 ```python
 import torch
 
