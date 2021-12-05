@@ -1,26 +1,31 @@
 ## <div align="center">Detect-objects-Drone-Yolov5</div>
 
-The model used was YOLO. Collaboration was used. The VisDrone 2019 dataset was used. This project was built using the repository [ultralytics / yolov5](https://github.com/ultralytics/yolov5) 
+The model used was YOLO. Used ["Colab"](https://colab.research.google.com) was used. The VisDrone 2019 dataset was used. This project was built using the repository [ultralytics / yolov5](https://github.com/ultralytics/yolov5) 
 
 ## <div align="center">Start</div>
 To begin, upload Project_YOLO5.ipynb to the Collaboratory:
 1. Visit [the Colaboratory page](https://colab.research.google.com/) in a new tab
 2. From the menu "File," open the notebook
 3. Then select GitHub. Enter a GitHub URL: shega2901. Reposytory: shega2901/Detect-objects-Drone-Yolov5. Branch: master.   Then upload Project_YOLO5.ipynb from Path: ![Open Project](/PictureReadme/Colab1.jpg)
+4. Mount Google Drive
+5. From the menu "File," save a copy in Drive
+6. 
+## <div align="center">An explanation of the Project_YOLOv5.ipynb algorithm</div>
 
 <details open>
-<summary>Install</summary>
+<summary>Clone&Install</summary>
+Cloning repositary to colab disk. Rename folder "Detect-objects-Drone-Yolov5" to "yolov5". Install required libraries for traning the model
 
 ```bash
-$ git clone https://github.com/ultralytics/yolov5
+$ git clone https://github.com/shega2901/Detect-objects-Drone-Yolov5
+$ %mv Detect-objects-Drone-Yolov5 yolov5  
 $ cd yolov5
 $ pip install -r requirements.txt
 ```
-
 </details>
 
 <details open>
-<summary>Inference</summary>
+<summary>Train model YOLO on VisDrone 2019 dataset</summary>
 
 Inference with YOLOv5 and [PyTorch Hub](https://github.com/ultralytics/yolov5/issues/36). Models automatically download
 from the [latest YOLOv5 release](https://github.com/ultralytics/yolov5/releases).
