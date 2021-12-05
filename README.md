@@ -107,7 +107,9 @@ VisDrone_datasets/VisDrone2019-DET-test-dev
 <b>img:</b> image size defaulted to 640<br>
 <b>batch:</b> batch size which is again directly dependent on your memory.<br>
 <b>data:</b> the path of your YAML file.<br>
-<b>weights:</b> the path of weights file that has downloaded.
+<b>weights:</b> the path of pre-weights file that has downloaded.<br>
+<b>epochs:</b> number of passes of the entire training the neural network with all the training data<br>
+Once training is completed in the "YoloV5/runs/train" folder are two weights files, <b>"best.pt"</b> and <b>"last.pt"</b> which are the trained weights.<br>
 </details>
 
 
