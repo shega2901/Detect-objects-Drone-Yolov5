@@ -1,16 +1,11 @@
 ## <div align="center">Detect-objects-Drone-Yolov5</div>
 
-The model used was YOLOv5. Collaboration was used. The VisDrone 2019 dataset was used.
+The model used was YOLO. Collaboration was used. The VisDrone 2019 dataset was used. This project was built using the repository [ultralytics / yolov5](https://github.com/ultralytics/yolov5) 
 
-## <div align="center">Quick Start Examples</div>
-
+## <div align="center">Start</div>
+To begin, upload [Project_YOLO5.ipynb](https://github.com/shega2901/Detect-objects-Drone-Yolov5/blob/master/Project_YOLO5.ipynb) to the Collaboratory.
 <details open>
 <summary>Install</summary>
-
-[**Python>=3.6.0**](https://www.python.org/) is required with all
-[requirements.txt](https://github.com/ultralytics/yolov5/blob/master/requirements.txt) installed including
-[**PyTorch>=1.7**](https://pytorch.org/get-started/locally/):
-<!-- $ sudo apt update && apt install -y libgl1-mesa-glx libsm6 libxext6 libxrender-dev -->
 
 ```bash
 $ git clone https://github.com/ultralytics/yolov5
