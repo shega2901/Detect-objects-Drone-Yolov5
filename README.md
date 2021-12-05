@@ -6,15 +6,18 @@ The model used was YOLO. Used ["Colab"](https://colab.research.google.com) was u
 To begin, upload Project_YOLO5.ipynb to the Collaboratory:
 1. Visit [the Colaboratory page](https://colab.research.google.com/) in a new tab
 2. From the menu "File," open the notebook
-3. Then select GitHub. Enter a GitHub URL: shega2901. Reposytory: shega2901/Detect-objects-Drone-Yolov5. Branch: master.   Then upload Project_YOLO5.ipynb from Path: ![Open Project](/PictureReadme/Colab1.jpg)
+3. Then select GitHub. Enter a GitHub URL: shega2901. Reposytory: shega2901/Detect-objects-Drone-Yolov5. Branch: master.<br>
+    Then upload Project_YOLO5.ipynb from Path: 
+    ![Open Project](/PictureReadme/Colab1.jpg)
 4. Mount Google Drive
-5. From the menu "File," save a copy in Drive
+5. From the menu "File" save a copy in Drive
 ## <div align="center">An explanation of the Project_YOLOv5.ipynb algorithm</div>
+
 
 <details open>
 <summary>Clone&Install</summary>
-Cloning repositary to colab disk. Rename folder "Detect-objects-Drone-Yolov5" to "yolov5". Install required libraries for traning the model
-
+Cloning repositary to colab disk. Rename folder "Detect-objects-Drone-Yolov5" to "yolov5". Install required libraries for traning the model<br>
+ 
 ```bash
 $ git clone https://github.com/shega2901/Detect-objects-Drone-Yolov5
 $ %mv Detect-objects-Drone-Yolov5 yolov5  
@@ -22,14 +25,14 @@ $ cd yolov5
 $ pip install -qr requirements.txt
 ```
 </details>
-
+<br>
 <details open>
 <summary>Preparing to train the model YOLO</summary>
-Downloading pre-weight to folder <b>yolov5/weights</b> for training model yolov5.<br>
-Pre-weights downloading from [github.com/ultralytics/yolov5/releases/download](https://github.com/ultralytics/yolov5/releases/download) .<br>
-Using script [download_weights.sh](/data/scripts/download_weights.sh) <br>
-Using script [download_weights.sh](/data/scripts/get_visdrone.sh)
-`bash data/scripts/download_weights.sh`
+ <b>1. Pre-weights for model YOLO</b><br>
+ Pre-weights downloading from https://github.com/ultralytics/yolov5/releases/download<br>
+ Downloading pre-weights to folder <b>yolov5/weights</b> for training model yolov5.<br>
+ Using script download_weights.sh: https://github.com/shega2901/Detect-objects-Drone-Yolov5/data/scripts/download_weights.sh <br>
+<pre><code> bash data/scripts/download_weights.sh</code></pre>
 <pre><code>
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5n.pt to yolov5n.pt...
 100% 3.77M/3.77M [00:01<00:00, 2.20MB/s]
@@ -52,10 +55,10 @@ Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5l
 Downloading https://github.com/ultralytics/yolov5/releases/download/v6.0/yolov5x6.pt to yolov5x6.pt...
 100% 269M/269M [00:16<00:00, 17.6MB/s]
 </code></pre><br><br>
-
+<b>2. Download dataset VISDrone2019 for train,val,test </b><br>
 Download dataset VISDrone2019 for train,val,test from https://github.com/ultralytics/yolov5/releases/download to folder <b>VisDrone_datasets</b><br>
-Using script [download_weights.sh](/data/scripts/get_visdrone.sh) <br>
-`!bash data/scripts/get_visdrone.sh`<br>
+Using script download_weights.sh:https://github.com/shega2901/Detect-objects-Drone-Yolov5/data/scripts/get_visdrone.sh <br>
+<pre><code>!bash data/scripts/get_visdrone.sh</code></pre>
 <pre><code>  
 Downloading https://github.com/ultralytics/yolov5/releases/download/v1.0/VisDrone2019-DET-train.zip to VisDrone_datasets/VisDrone2019-DET-train.zip...
 100% 1.44G/1.44G [02:00<00:00, 12.9MB/s]
@@ -69,10 +72,15 @@ Unzipping VisDrone_datasets/VisDrone2019-DET-test-dev.zip...
 Downloading https://github.com/ultralytics/yolov5/releases/download/v1.0/VisDrone2019-DET-test-challenge.zip to VisDrone_datasets/VisDrone2019-DET-test-challenge.zip...
 100% 292M/292M [01:04<00:00, 4.77MB/s]
 Unzipping VisDrone_datasets/VisDrone2019-DET-test-challenge.zip... 
-</code></pre><br><br>
-For each picture in the "images" folder, there is an "annotations" folder containing a text file. Each file from the Annotation package stores the detection results for the corresponding image, with each line containing an instance of an object in the image. The format of each line is as follows:  
+</code></pre><br>
+ 
+ 
+<b>3. Convert VisDrone dataset to YOLO dataset</b><br>
+For each picture in the "images" folder, there is an "annotations" folder containing a text file.<br>
+Each file from the Annotation package stores the detection results for the corresponding image, <br>
+with each line containing an instance of an object in the image. The format of each line is as follows:  
 `<bbox_left>,<bbox_top>,<bbox_width>,<bbox_height>,<score>,<object_category>,<truncation>,<occlusion>`  
-These text files need to generate labels for each image in YOLO format:
+These text files need to generate labels for each image in YOLO format:<br>
 `<class> <x_center> <y_center> <width> <height>`<br>
 where:<br>
 `<class> = <object_category> if <score> = 1`<br>
@@ -90,41 +98,20 @@ VisDrone_datasets/VisDrone2019-DET-test-dev
 100% 1610/1610 [00:13<00:00, 119.04it/s]
 </code></pre><br>
  As a result of executing the script, a labels folder is created in each folder from the VisDrone2019 dataset<br>
-</details>
-<details open>
-<summary>Train model YOLO on VisDrone 2019 dataset</summary><br>
-`python train.py --img 640 --batch 12 --epochs 10 --data ./data/VisDrone.yaml --weights ./weights/yolov5s.pt`
-</details>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-   
-  
-  
-  
-  
-  
-  
-```python
-import torch
-
-# Model
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5l, yolov5x, custom
-
-# Images
-img = 'https://ultralytics.com/images/zidane.jpg'  # or file, Path, PIL, OpenCV, numpy, list
-
-# Inference
-results = model(img)
-
-# Results
-results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
-```
-
-</details>
-
-
 
 <details>
-<summary>Inference with detect.py</summary>
+<summary>Train model YOLO on VisDrone2019 dataset</summary>
+<pre><code> python train.py --img 640 --batch 12 --epochs 10 --data ./data/VisDrone.yaml --weights ./weights/yolov5s.pt</code></pre><br>
+<b>Command explanation:</b><br>
+<b>train.py:</b> python file containing the training code.<br>
+<b>img:</b> image size defaulted to 640<br>
+<b>batch:</b> batch size which is again directly dependent on your memory.<br>
+<b>data:</b> the path of your YAML file.<br>
+<b>weights:</b> the path of weights file that has downloaded.
+</details>
+
+
+
 
 `detect.py` runs inference on a variety of sources, downloading models automatically from
 the [latest YOLOv5 release](https://github.com/ultralytics/yolov5/releases) and saving results to `runs/detect`.
