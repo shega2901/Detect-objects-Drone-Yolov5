@@ -3,7 +3,8 @@
 The model used was YOLO. Collaboration was used. The VisDrone 2019 dataset was used. This project was built using the repository [ultralytics / yolov5](https://github.com/ultralytics/yolov5) 
 
 ## <div align="center">Start</div>
-To begin, upload [Project_YOLO5.ipynb](https://github.com/shega2901/Detect-objects-Drone-Yolov5/blob/master/Project_YOLO5.ipynb) to the Collaboratory.
+To begin, upload Project_YOLO5.ipynb to the Collaboratory:
+1. Visit [the Colaboratory page](https://colab.research.google.com/)
 <details open>
 <summary>Install</summary>
 
