@@ -824,5 +824,3 @@ Input video<br>
 Output video<br>
     ![videoO](/runs/detect/exp/181015-01-011_640.gif)
 </details>
-
-
