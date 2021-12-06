@@ -266,7 +266,7 @@ Checking model accuracy on VisDrone2019 val datasets. Using the weights file - b
 <b>Command explanation:</b><br>
 <b>val.py:</b> python file containing the training code.<br>
 <b>img:</b> image size defaulted to 640<br>
-<b>data:</b> the path of your YAML file.<br>
+<b>data:</b> the path of VisDrone.yaml file.<br>
  <b>task:</b> = val, default = val<br>
 <b>weights:</b> The path to the weights file created during training.<br>
 <pre><code>  
@@ -309,7 +309,7 @@ Checking model accuracy on VisDrone2019 test dev datasets. Using the weights fil
 <b>Command explanation:</b><br>
 <b>val.py:</b> python file containing the training code.<br>
 <b>img:</b> image size defaulted to 640<br>
-<b>data:</b> the path of your YAML file.<br>
+<b>data:</b> the path of VisDrone.yaml file.<br>
 <b>task:</b> = test<br>
 <b>weights:</b> The path to the weights file created during training.<br>
 <pre><code>  
